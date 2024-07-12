@@ -4,6 +4,8 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import NavBar from './components/NavBar'
 import Handbags from './components/Handbags'
+import Perfumes from './components/Perfumes'
+import Shoes from './components/Shoes'
 
 import {
   BrowserRouter as Router,
@@ -38,6 +40,8 @@ function App() {
       <NavBar />
       <Routes>
           <Route exact path="/handbags" element={<Handbags data={data} />} />
+          <Route exact path="/perfumes" element={<Perfumes data={data} />} />
+          <Route exact path="/shoes" element={<Shoes data={data} />} />
           
       </Routes>
     </Router>
