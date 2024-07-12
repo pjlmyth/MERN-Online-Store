@@ -1,6 +1,17 @@
 import React from 'react';
 
 const NavBar = (props) => {
+
+    const handbags= () => {
+        props.setPage(['Handbags']);
+        console.log(props.page);
+    }
+
+    const handleNext= () => {
+        props.setPage(props.page + 1);
+        console.log(props.page);
+    }
+
     return (
         <>
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -25,7 +36,7 @@ const NavBar = (props) => {
                   More
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="/handbags">Handbags</a></li>
+                  <li onClick={handbags}><a className="dropdown-item" >Handbags</a></li>
                   <li><a className="dropdown-item" href="#">Jewelry</a></li>
                   <li><a className="dropdown-item" href="#">Shoes</a></li>
                   <li><a className="dropdown-item" href="#">Perfumes</a></li>
