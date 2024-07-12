@@ -1,0 +1,13 @@
+[{
+    "userid": "Medium",
+    "username": "Brown",
+    "password": "Striped"
+},
+{
+    "size": "Small",
+    "color": "Red",
+    "pattern": "Solid",
+    "material": "Wool",
+    "condition": "Used",
+    "forFoot": "Right"
+}]
