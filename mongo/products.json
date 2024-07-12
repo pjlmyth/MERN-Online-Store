@@ -70,10 +70,94 @@
         "gender": "Women"
     },
     {
-        "productID": 1,
-        "name": "CarryAll Purse",
+        "productID": 9,
+        "name": "Christopher Bag",
         "category": "Handbags",
-        "price": 3100,
+        "price": 4500,
+        "gender": "Men"
+    },
+    {
+        "productID": 10,
+        "name": "Rider Boot",
+        "category": "Shoes",
+        "price": 1910,
+        "gender": "Men"
+    },
+    {
+        "productID": 11,
+        "name": "Louis Loafer",
+        "category": "Shoes",
+        "price": 2110,
+        "gender": "Men"
+    },
+    {
+        "productID": 12,
+        "name": "Perfumes Miniature Set",
+        "category": "Perfumes",
+        "price": 385,
+        "gender": "Women"
+    },
+    {
+        "productID": 13,
+        "name": "City of Stars",
+        "category": "Perfumes",
+        "price": 329,
+        "gender": "Women"
+    },
+    {
+        "productID": 13,
+        "name": "Afternoon Swim Perfume",
+        "category": "Perfumes",
+        "price": 320,
+        "gender": "Men"
+    },
+    {
+        "productID": 14,
+        "name": "Neverfull Handbag",
+        "category": "Handbags",
+        "price": 2480,
+        "gender": "Women"
+    },
+    {
+        "productID": 15,
+        "name": "OnTheGo Handbag",
+        "category": "Handbags",
+        "price": 2900,
+        "gender": "Women"
+    },
+    {
+        "productID": 16,
+        "name": "KeepAll Handbag",
+        "category": "Handbags",
+        "price": 3700,
+        "gender": "Men"
+    },
+    {
+        "productID": 17,
+        "name": "Louisa Hair Clip",
+        "category": "Jewelry",
+        "price": 420,
+        "gender": "Women"
+    },
+    {
+        "productID": 18,
+        "name": "LV Lace Necklace",
+        "category": "Jewelry",
+        "price": 790,
+        "gender": "Women"
+    },
+    {
+        "productID": 19,
+        "name": "Run Away Sneaker",
+        "category": "Shoes",
+        "price": 1120,
+        "gender": "Men"
+    },
+    {
+        "productID": 20,
+        "name": "OnTheGo Voyage Handbag",
+        "category": "Handbags",
+        "price": 4300,
         "gender": "Women"
     }
 ]
