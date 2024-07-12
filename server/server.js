@@ -99,6 +99,21 @@ app.get('/user_orders', async (req, res) => {
     }
 });
 
+app.get('/products/:page/:limit', async (req, res) => {
+    try {
+        let { page, limit } = req.params;
+        limit = +limit; 
+        const client = await MongoClient.connect(url);
+        const db = client.db(dbName);
+        const collection = db.collection('products');
+        const socks = await collection.find({}).skip((page - 1) * limit).limit(limit).toArray();
+        res.json(socks);
+    } catch (err) {
+        console.error('Error:', err);
+        res.status(500).send('Missing Products ☹');
+    }
+});
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
