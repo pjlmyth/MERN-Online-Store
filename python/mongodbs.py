@@ -1,8 +1,6 @@
 from pymongo import MongoClient
-import random
 from datetime import datetime, timedelta
 import json
-import csv
 import pandas as pd
 
 client = MongoClient('mongodb://localhost:27017/')
