@@ -14,12 +14,69 @@ const PORT = 3000;
 
 app.use(express.json());
 
-app.get('/product', async (req, res) => {
+app.get('/products', async (req, res) => {
     try {
         const client = await MongoClient.connect(url);
         const db = client.db(dbName);
         const collection = db.collection('products');
         const products  = await collection.find({}).toArray();
+        res.json(products);
+    } catch (err) {
+        console.error("Error:", err);
+        res.status(500).send("Missing Products ☹");
+    }
+});
+
+//Note: add if else for different search entries like categories
+app.post('/product/search', async (req, res) => {
+    try {
+        const prodname = req.body.searchTerm;
+
+        const client = await MongoClient.connect(url);
+        const db = client.db(dbName);
+        const collection = db.collection('products');
+        const products = await collection.find({"name": prodname}).toArray();
+        res.json(products);
+    } catch (err) {
+        console.error('Error:', err);
+        res.status(500).send('"Missing Products ☹"');
+    }
+});
+
+app.get('/users', async (req, res) => {
+    try {
+        const client = await MongoClient.connect(url);
+        const db = client.db(dbName);
+        const collection = db.collection('users');
+        const products  = await collection.find({}).toArray();
+        res.json(products);
+    } catch (err) {
+        console.error("Error:", err);
+        res.status(500).send("Missing Products ☹");
+    }
+});
+
+app.get('/orders', async (req, res) => {
+    try {
+        const client = await MongoClient.connect(url);
+        const db = client.db(dbName);
+        const collection = db.collection('orders');
+        const products  = await collection.find({}).toArray();
+        res.json(products);
+    } catch (err) {
+        console.error("Error:", err);
+        res.status(500).send("Missing Products ☹");
+    }
+});
+
+//Note: mot fully operational
+app.get('/user_orders', async (req, res) => {
+    try {
+        const userid = req.session.userid;
+        const client = await MongoClient.connect(url);
+        const db = client.db(dbName);
+        const collection = db.collection('orders');
+        const products  = await collection.find({'userid': userid}).toArray();
         res.json(products);
     } catch (err) {
         console.error("Error:", err);
