@@ -1,50 +1,79 @@
 [
     {
-        "sockDetails": {
-            "size": "Large",
-            "color": "Yellow",
-            "pattern": "Plain",
-            "material": "Bamboo",
-            "condition": "Used",
-            "forFoot": "Both"
-        },
-        "additionalFeatures": {
-            "waterResistant": false,
-            "padded": false,
-            "antiBacterial": true
-        },
-        "addedTimestamp": "2024-01-26T20:53:12.519940"
+        "productID": 1,
+        "name": "CarryAll Purse",
+        "category": "Handbags",
+        "price": 3100,
+        "gender": "Women"
     },
     {
-        "sockDetails": {
-            "size": "Small",
-            "color": "Red",
-            "pattern": "Checkered",
-            "material": "Wool",
-            "condition": "New",
-            "forFoot": "Left"
-        },
-        "additionalFeatures": {
-            "waterResistant": true,
-            "padded": false,
-            "antiBacterial": true
-        },
-        "addedTimestamp": "2024-01-27T20:53:12.519940"
+        "productID": 2,
+        "name": "Camera Box",
+        "category": "Handbags",
+        "price": 3900,
+        "gender": "Women"
     },
     {
-        "sockDetails": {
-            "size": "Medium",
-            "color": "Blue",
-            "pattern": "Striped",
-            "material": "Silk",
-            "condition": "Used",
-            "forFoot": "Right"
-        },
-        "additionalFeatures": {
-            "waterResistant": false,
-            "padded": false,
-            "antiBacterial": true
-        },
-        "addedTimestamp": "2024-01-26T20:53:12.519940"
+        "productID": 1,
+        "name": "CarryAll Purse",
+        "category": "Handbags",
+        "price": 3100,
+        "gender": "Women"
+    },
+    {
+        "productID": 2,
+        "name": "CarryAll Purse",
+        "category": "Handbags",
+        "price": 3100,
+        "gender": "Women"
+    },
+    {
+        "productID": 3,
+        "name": "Turquoise Rodeo Necklace",
+        "category": "Jewelry",
+        "price": 1500,
+        "gender": "Men"
+    },
+    {
+        "productID": 4,
+        "name": "Shell Necklace",
+        "category": "Jewelry",
+        "price": 1290,
+        "gender": "Men"
+    },
+    {
+        "productID": 5,
+        "name": "Imagination Cologne",
+        "category": "Perfumes",
+        "price": 320,
+        "gender": "Men"
+    },
+    {
+        "productID": 6,
+        "name": "Trainer Sneaker",
+        "category": "Shoes",
+        "price": 1290,
+        "gender": "Women"
+    },
+    {
+        "productID": 7,
+        "name": "Soho Flat Loafer",
+        "category": "Shoes",
+        "price": 1080,
+        "gender": "Women"
+    },
+    {
+        "productID": 8,
+        "name": "Shake Sandal",
+        "category": "Shoes",
+        "price": 1150,
+        "gender": "Women"
+    },
+    {
+        "productID": 1,
+        "name": "CarryAll Purse",
+        "category": "Handbags",
+        "price": 3100,
+        "gender": "Women"
     }
 ]
