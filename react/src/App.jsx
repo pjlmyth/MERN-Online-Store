@@ -20,7 +20,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
         try {
-            const response = await fetch(`http://localhost:3000/product`);
+            const response = await fetch(`http://localhost:3000/products`);
             if (!response.ok) {
                 throw new Error('Data could not be fetched!');
             }
