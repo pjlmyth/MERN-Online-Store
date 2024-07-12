@@ -7,10 +7,21 @@ const NavBar = (props) => {
         console.log(props.page);
     }
 
-    const handleNext= () => {
-        props.setPage(props.page + 1);
+    const shoes= () => {
+        props.setPage(['Shoes']);
         console.log(props.page);
     }
+
+    const jewelry= () => {
+        props.setPage(['Jewelry']);
+        console.log(props.page);
+    }
+
+    const perfumes= () => {
+        props.setPage(['Perfumes']);
+        console.log(props.page);
+    }
+    
 
     return (
         <>
@@ -37,9 +48,9 @@ const NavBar = (props) => {
                 </a>
                 <ul className="dropdown-menu">
                   <li onClick={handbags}><a className="dropdown-item" >Handbags</a></li>
-                  <li><a className="dropdown-item" href="#">Jewelry</a></li>
-                  <li><a className="dropdown-item" href="#">Shoes</a></li>
-                  <li><a className="dropdown-item" href="#">Perfumes</a></li>
+                  <li onClick={jewelry}><a className="dropdown-item" href="#">Jewelry</a></li>
+                  <li onClick={shoes}><a className="dropdown-item" href="#">Shoes</a></li>
+                  <li onClick={perfumes}><a className="dropdown-item" href="#">Perfumes</a></li>
                   <li><hr className="dropdown-divider" /></li>
                   <li><a className="dropdown-item" href="#">Account Info</a></li>
                 </ul>
