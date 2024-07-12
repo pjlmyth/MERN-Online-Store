@@ -12,7 +12,7 @@ const NavBar = (props) => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">Home</a>
+                <a className="nav-link active" aria-current="page" href="/">Home</a>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="#">Women</a>
@@ -25,7 +25,7 @@ const NavBar = (props) => {
                   More
                 </a>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="#">Handbags</a></li>
+                  <li><a className="dropdown-item" href="/handbags">Handbags</a></li>
                   <li><a className="dropdown-item" href="#">Jewelry</a></li>
                   <li><a className="dropdown-item" href="#">Shoes</a></li>
                   <li><a className="dropdown-item" href="#">Perfumes</a></li>

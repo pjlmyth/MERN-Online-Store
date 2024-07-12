@@ -3,9 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import NavBar from './components/NavBar'
-import Handbags from './components/Handbags'
-import Perfumes from './components/Perfumes'
-import Shoes from './components/Shoes'
+import ProductsList from './components/ProductsList'
 
 import {
   BrowserRouter as Router,
@@ -16,11 +14,11 @@ import {
 
 function App() {
   const [data, setData] = useState([]);
-
+  const [page, setPage] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
         try {
-            const response = await fetch(`http://localhost:3000/products`);
+            const response = await fetch(`http://localhost:3000/products/${page}`);
             if (!response.ok) {
                 throw new Error('Data could not be fetched!');
             }
@@ -32,17 +30,14 @@ function App() {
     };
 
     fetchData();
-}, []);
+}, [page]);
 
   return (
     <>
     <Router>
       <NavBar />
       <Routes>
-          <Route exact path="/handbags" element={<Handbags data={data} />} />
-          <Route exact path="/perfumes" element={<Perfumes data={data} />} />
-          <Route exact path="/shoes" element={<Shoes data={data} />} />
-          
+        <Route exact path="/" element={<ProductsList data={data} page={page} setPage={setPage} />} />
       </Routes>
     </Router>
       
