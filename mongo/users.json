@@ -4,10 +4,7 @@
     "password": "Striped"
 },
 {
-    "size": "Small",
-    "color": "Red",
-    "pattern": "Solid",
-    "material": "Wool",
-    "condition": "Used",
-    "forFoot": "Right"
+    "userid": "Medium",
+    "username": "Brown",
+    "password": "Striped"
 }]
