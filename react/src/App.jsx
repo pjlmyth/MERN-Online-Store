@@ -35,7 +35,7 @@ function App() {
   return (
     <>
     <Router>
-      <NavBar />
+      <NavBar data={data} page={page} setPage={setPage}/>
       <Routes>
         <Route exact path="/" element={<ProductsList data={data} page={page} setPage={setPage} />} />
       </Routes>
