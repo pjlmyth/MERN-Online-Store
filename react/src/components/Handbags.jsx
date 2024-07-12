@@ -1,9 +1,17 @@
-import React from 'react';
+import React from 'react'
+import Product from './Product'
 
 const Handbags = (props) => {
     return (
         <>
-        <p>Hello World</p>
+
+        <div className="card-container" style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
+            {
+                props.data.map((product) => (
+                    <Product key={product._id} data={product} />
+                ))
+            }
+        </div>
         </>
     );
 };
