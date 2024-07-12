@@ -34,7 +34,7 @@ app.get('/products/:category', async (req, res) => {
         const client = await MongoClient.connect(url);
         const db = client.db(dbName);
         const collection = db.collection('products');
-        const products  = await collection.find({'product_category': category}).toArray();
+        const products  = await collection.find({'category': category}).toArray();
         res.json(products);
     } catch (err) {
         console.error("Error:", err);
