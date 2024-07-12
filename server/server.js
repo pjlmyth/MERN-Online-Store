@@ -27,6 +27,21 @@ app.get('/products', async (req, res) => {
     }
 });
 
+app.get('/products/:category', async (req, res) => {
+    try {
+        const { category } = req.params;
+        console.log(`Finding ${category}`)
+        const client = await MongoClient.connect(url);
+        const db = client.db(dbName);
+        const collection = db.collection('products');
+        const products  = await collection.find({'product_category': category}).toArray();
+        res.json(products);
+    } catch (err) {
+        console.error("Error:", err);
+        res.status(500).send("Missing Products ☹");
+    }
+});
+
 //Note: add if else for different search entries like categories
 app.post('/product/search', async (req, res) => {
     try {
