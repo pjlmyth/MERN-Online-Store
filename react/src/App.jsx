@@ -7,7 +7,7 @@ import ProductsList from './components/ProductsList'
 import Register from './components/register'
 import LoginForm from './components/LoginForm'
 import { AuthProvider } from './hooks/AuthContext';
-
+import Cart from './components/Cart'
 
 
 import {
@@ -55,6 +55,7 @@ useEffect(() => {
         <Route exact path="/" element={<ProductsList data={data} page={page} setPage={setPage} addToCart={addToCart}/>} />
         <Route path='/register' element={<Register/>}/>
         <Route path='/login' element={<LoginForm/>}/>
+        <Route path='/cart' element={<Cart data={cart}/>}/>
       </Routes>
     </Router>
     </AuthProvider>  

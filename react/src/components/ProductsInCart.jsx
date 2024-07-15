@@ -28,7 +28,7 @@ const Product = (props) => {
                 <div className="card-text">Category: {props.data.category}</div>
             </div>
             <div className="card-footer" style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <button className="btn btn-sm btn-dark" onClick={() => props.addToCart(props.data)}>Add To Cart</button>
+
                 <div className="card-text">Price: ${props.data.price}</div>
             </div>
         </div>
