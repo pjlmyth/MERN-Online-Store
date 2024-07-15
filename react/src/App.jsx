@@ -17,6 +17,7 @@ import {
 } from "react-router-dom";
 
 function App() {
+  const [cart, setCart] = useState([]);
   const [data, setData] = useState([]);
   const [page, setPage] = useState([]);
   useEffect(() => {
@@ -29,19 +30,27 @@ function App() {
             const json_response = await response.json();
             setData(json_response); // assign JSON response to the data variable.
         } catch (error) {
-            console.error('Error fetching socks:', error);
+            console.error('Error fetching products:', error);
         }
     };
 
     fetchData();
 }, [page]);
 
+useEffect(() => {
+  console.log(cart)
+  }, [cart]);
+
+  const addToCart = (el) => {
+    setCart([...cart, el]);
+    };
+
   return (
     <>
     <Router>
       <NavBar data={data} page={page} setPage={setPage}/>
       <Routes>
-        <Route exact path="/" element={<ProductsList data={data} page={page} setPage={setPage} />} />
+        <Route exact path="/" element={<ProductsList data={data} page={page} setPage={setPage} addToCart={addToCart}/>} />
         <Route path='/register' element={<Register/>}/>
         <Route path='/login' element={<LoginForm/>}/>
       </Routes>
