@@ -1,56 +1,62 @@
 [
-    {
-      "userid": "4563534676",
-      "username": "LavenderDream89",
-      "password": "P3@chBlossom!",
-      "firstName": "Sophia",
-      "lastName": "Chen",
-      "gender": "Female",
-      "birthday": "1989-05-12"
-    },
-    {
-      "userid": "0006754277",
-      "username": "RosePetal22",
-      "password": "M00nlight$tar",
-      "firstName": "Emma",
-      "lastName": "Garcia",
-      "gender": "Female",
-      "birthday": "1995-09-22"
-    },
-    {
-      "userid": "0000012364",
-      "username": "SapphireQueen7",
-      "password": "Cryst@lButterfly3",
-      "firstName": "Olivia",
-      "lastName": "Patel",
-      "gender": "Female",
-      "birthday": "1992-11-07"
-    },
-    {
-      "userid": "1000012364",
-      "username": "MermaidWish55",
-      "password": "0ceanDre@ms2024",
-      "firstName": "Ava",
-      "lastName": "Nguyen",
-      "gender": "Female",
-      "birthday": "1998-03-15"
-    },
-    {
-      "userid": "2200012364",
-      "username": "PinkUnicorn42",
-      "password": "R@inb0wSpr!nkles",
-      "firstName": "Isabella",
-      "lastName": "Kim",
-      "gender": "Female",
-      "birthday": "1997-07-30"
-    },
-    {
-      "userid": "3300024728",
-      "username": "TechWizard88",
-      "password": "C0d3M@ster!",
-      "firstName": "Ethan",
-      "lastName": "Smith",
-      "gender": "Male",
-      "birthday": "1988-12-03"
-    }
-  ]
+  {
+    "userid": "4563534676",
+    "username": "LavenderDream89",
+    "email": "lavenderdream89@example.com",
+    "password": "P3@chBlossom!",
+    "firstName": "Sophia",
+    "lastName": "Chen",
+    "gender": "Female",
+    "birthday": "1989-05-12"
+  },
+  {
+    "userid": "0006754277",
+    "username": "RosePetal22",
+    "email": "rosepetal22@example.com",
+    "password": "M00nlight$tar",
+    "firstName": "Emma",
+    "lastName": "Garcia",
+    "gender": "Female",
+    "birthday": "1995-09-22"
+  },
+  {
+    "userid": "0000012364",
+    "username": "SapphireQueen7",
+    "email": "sapphirequeen7@example.com",
+    "password": "Cryst@lButterfly3",
+    "firstName": "Olivia",
+    "lastName": "Patel",
+    "gender": "Female",
+    "birthday": "1992-11-07"
+  },
+  {
+    "userid": "1000012364",
+    "username": "MermaidWish55",
+    "email": "mermaidwish55@example.com",
+    "password": "0ceanDre@ms2024",
+    "firstName": "Ava",
+    "lastName": "Nguyen",
+    "gender": "Female",
+    "birthday": "1998-03-15"
+  },
+  {
+    "userid": "2200012364",
+    "username": "PinkUnicorn42",
+    "email": "pinkunicorn42@example.com",
+    "password": "R@inb0wSpr!nkles",
+    "firstName": "Isabella",
+    "lastName": "Kim",
+    "gender": "Female",
+    "birthday": "1997-07-30"
+  },
+  {
+    "userid": "3300024728",
+    "username": "TechWizard88",
+    "email": "techwizard88@example.com",
+    "password": "C0d3M@ster!",
+    "firstName": "Ethan",
+    "lastName": "Smith",
+    "gender": "Male",
+    "birthday": "1988-12-03"
+  }
+]
