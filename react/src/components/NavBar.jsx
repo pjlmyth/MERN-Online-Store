@@ -1,26 +1,35 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 const NavBar = (props) => {
+    const navigate = useNavigate();
+    const cartClick = (cart) => {
+      console.log("in CartClick")
+      console.log(cart)
+      navigate('/cart',{state:props.cart})
+    }
 
     const handbags= () => {
         props.setPage(['Handbags']);
-        console.log(props.page);
+        
     }
 
     const shoes= () => {
         props.setPage(['Shoes']);
-        console.log(props.page);
+        
     }
 
     const jewelry= () => {
         props.setPage(['Jewelry']);
-        console.log(props.page);
+        
     }
 
     const perfumes= () => {
         props.setPage(['Perfumes']);
-        console.log(props.page);
+        
     }
+    
     
 
     return (
@@ -41,6 +50,9 @@ const NavBar = (props) => {
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="#">Men</a>
+              </li>
+              <li className="nav-item">
+                <div className="nav-link" onClick={()=>{cartClick(props.cart)}}>Cart</div>
               </li>
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
