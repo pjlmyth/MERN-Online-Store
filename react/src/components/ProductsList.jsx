@@ -7,7 +7,7 @@ const ProductsList = (props) => {
             <div className="card-container" style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
                 {
                     props.data.map((product) => (
-                        <Product key={product._id} data={product} />
+                        <Product key={product._id} data={product} addToCart={props.addToCart}/>
                     ))
                 }
             </div>
