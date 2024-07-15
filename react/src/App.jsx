@@ -6,6 +6,7 @@ import NavBar from './components/NavBar'
 import ProductsList from './components/ProductsList'
 import Register from './components/register'
 import LoginForm from './components/LoginForm'
+import Cart from './components/Cart'
 import { UserContextProvider } from './hooks/UserContext'
 
 
@@ -53,6 +54,7 @@ useEffect(() => {
         <Route exact path="/" element={<ProductsList data={data} page={page} setPage={setPage} addToCart={addToCart}/>} />
         <Route path='/register' element={<Register/>}/>
         <Route path='/login' element={<LoginForm/>}/>
+        <Route path='/cart' element={<Cart data={cart}/>}/>
       </Routes>
     </Router>
       

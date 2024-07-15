@@ -36,6 +36,7 @@ app.get('/products/:category', async (req, res) => {
         const db = client.db(dbName);
         const collection = db.collection('products');
         const products  = await collection.find({'category': category}).toArray();
+        console.log(products)
         res.json(products);
     } catch (err) {
         console.error("Error:", err);
