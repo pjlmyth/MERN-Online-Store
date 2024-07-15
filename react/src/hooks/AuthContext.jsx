@@ -1,15 +1,21 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
-// Creating an authentication context
 const AuthContext = createContext(null);
 
-// Auth provider component that wraps your app components
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
+    useEffect(() => {
+        // Check if there's a user in localStorage when the app loads
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
+    }, []);
+
     const login = async (username, password) => {
         try {
-            const response = await fetch(`"http://localhost:3000/login`, {
+            const response = await fetch(`http://localhost:3000/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -17,22 +23,31 @@ export const AuthProvider = ({ children }) => {
                 body: JSON.stringify({ username, password }),
             });
             const data = await response.json();
-            if (data.uid) {
-                setUser({
-                    username,
-                    uid: data.uid // Storing the uid returned from the server
-                });
+            if (response.ok) {
+                console.log(response)
+                const userData = {
+                    userid: data.userid,
+                    username: data.username,
+                    firstName: data.firstName,
+                    lastName: data.lastName
+                };
+                setUser(userData);
+                localStorage.setItem('user', JSON.stringify(userData));
             } else {
                 throw new Error(data.message || 'Login failed');
             }
         } catch (error) {
-            console.error(error);
+            console.error('Login error:', error);
+            throw error;
         }
     };
 
     const logout = () => {
-        setUser(null); // In real scenarios, you might want to invalidate the session on the server as well
+        setUser(null);
+        localStorage.removeItem('user');
     };
+
+    console.log("Current user in AuthContext:", user);  // Add this line
 
     return (
         <AuthContext.Provider value={{ user, login, logout }}>
@@ -41,5 +56,4 @@ export const AuthProvider = ({ children }) => {
     );
 };
 
-// Hook to use authentication
 export const useAuth = () => useContext(AuthContext);
