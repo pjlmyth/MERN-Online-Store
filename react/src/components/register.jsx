@@ -1,43 +1,61 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import axios from 'axios'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
-function Signup() {    
+const Register = () => {
+    const navigate = useNavigate();
 
-    const [userid, setUserid] = useState('')
-    const [username, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [gender, setGender] = useState('')
-    const [birthday, setBirthday] = useState('')
-    const generateUserid = () => {
+    const [userData, setUserData] = useState({
+        name: "",
+        email: "",
+        password: "",
+        firstName: "",
+        lastName: "",
+        gender: "",
+        birthday: ""
+    });
+
+    const generateUserId = () => {
         return Math.floor(1000000000 + Math.random() * 9000000000).toString();
-    }
-    const navigate = useNavigate()
+    };
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        const newUserid = generateUserid()
-        setUserid(newUserid)
-        axios.post("http://localhost:3000/register", { 
-            userid: newUserid,
-            username, 
-            email, 
-            password, 
-            firstName, 
-            lastName, 
-            gender, 
-            birthday
-        })
-        .then(result => {
-            console.log(result)
-            navigate("/login")
-        })
-        .catch(err => console.log(err))
-    }
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setUserData({
+            ...userData,
+            [name]: value,
+        });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const newUserId = generateUserId();
+        const submission = {
+            ...userData,
+            userid: newUserId
+        };
+
+        try {
+            const response = await fetch("http://localhost:3000/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(submission),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || "Registration failed");
+            }
+
+            console.log(data);
+            navigate("/login");
+        } catch (error) {
+            console.error("Error registering user:", error.message);
+            // Handle errors here, e.g., show error message to user
+        }
+    };
 
     return (
         <div className="d-flex justify-content-center align-items-center bg-secondary vh-100">
@@ -45,85 +63,89 @@ function Signup() {
                 <h2><center>Sign Up</center></h2>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
-                        <label htmlFor="name">
-                            <strong>Username</strong>
-                        </label>
-                        <input type="text" 
-                        placeholder='Enter Name' 
-                        autoComplete='off' 
-                        name='name' 
-                        className='form-control rounded-0'
-                        onChange={(e) => setName(e.target.value)}
+                        <label htmlFor="name"><strong>Username</strong></label>
+                        <input
+                            type="text"
+                            placeholder="Enter Username"
+                            name="name"
+                            className="form-control rounded-0"
+                            value={userData.name}
+                            onChange={handleChange}
+                            required
                         />
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="email">
-                            <strong>Email</strong>
-                        </label>
-                        <input type="email" 
-                        placeholder='Enter Email' 
-                        autoComplete='off' 
-                        name='email' 
-                        className='form-control rounded-0' 
-                        onChange={(e) => setEmail(e.target.value)}
+                        <label htmlFor="email"><strong>Email</strong></label>
+                        <input
+                            type="email"
+                            placeholder="Enter Email"
+                            name="email"
+                            className="form-control rounded-0"
+                            value={userData.email}
+                            onChange={handleChange}
+                            required
                         />
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="password">
-                            <strong>Password</strong>
-                        </label>
-                        <input type="password" 
-                        placeholder='Enter Password' 
-                        name='password' 
-                        className='form-control rounded-0' 
-                        onChange={(e) => setPassword(e.target.value)}
+                        <label htmlFor="password"><strong>Password</strong></label>
+                        <input
+                            type="password"
+                            placeholder="Enter Password"
+                            name="password"
+                            className="form-control rounded-0"
+                            value={userData.password}
+                            onChange={handleChange}
+                            required
                         />
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="firstName">
-                            <strong>First Name</strong>
-                        </label>
-                        <input type="text" 
-                        placeholder='Enter First Name' 
-                        name='firstName' 
-                        className='form-control rounded-0' 
-                        onChange={(e) => setFirstName(e.target.value)}
+                        <label htmlFor="firstName"><strong>First Name</strong></label>
+                        <input
+                            type="text"
+                            placeholder="Enter First Name"
+                            name="firstName"
+                            className="form-control rounded-0"
+                            value={userData.firstName}
+                            onChange={handleChange}
+                            required
                         />
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="lastName">
-                            <strong>Last Name</strong>
-                        </label>
-                        <input type="text" 
-                        placeholder='Enter Last Name' 
-                        name='lastName' 
-                        className='form-control rounded-0' 
-                        onChange={(e) => setLastName(e.target.value)}
+                        <label htmlFor="lastName"><strong>Last Name</strong></label>
+                        <input
+                            type="text"
+                            placeholder="Enter Last Name"
+                            name="lastName"
+                            className="form-control rounded-0"
+                            value={userData.lastName}
+                            onChange={handleChange}
+                            required
                         />
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="gender">
-                            <strong>Gender</strong>
-                        </label>
-                        <select 
-                        name='gender' 
-                        className='form-control rounded-0'
-                        onChange={(e) => setGender(e.target.value)}
+                        <label htmlFor="gender"><strong>Gender</strong></label>
+                        <select
+                            name="gender"
+                            className="form-control rounded-0"
+                            value={userData.gender}
+                            onChange={handleChange}
+                            required
                         >
                             <option value="">Select Gender</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
                         </select>
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="birthday">
-                            <strong>Birthday</strong>
-                        </label>
-                        <input type="date" 
-                        name='birthday' 
-                        className='form-control rounded-0' 
-                        onChange={(e) => setBirthday(e.target.value)}
+                        <label htmlFor="birthday"><strong>Birthday</strong></label>
+                        <input
+                            type="date"
+                            name="birthday"
+                            className="form-control rounded-0"
+                            value={userData.birthday}
+                            onChange={handleChange}
+                            required
                         />
                     </div>
                     <button type="submit" className="btn btn-success w-100 rounded-0">
@@ -137,6 +159,6 @@ function Signup() {
             </div>
         </div>
     );
-}
+};
 
-export default Signup;
+export default Register;
