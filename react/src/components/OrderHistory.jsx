@@ -6,7 +6,7 @@ import ProductsList from './ProductsList';
 const OrderHistory = () => {
     const { user } = useAuth();
     const navigate = useNavigate();
-    const [orderProducts, setOrderProducts] = useState([]);
+    const [orderHistory, setOrderHistory] = useState([]);
 
     useEffect(() => {
         if (!user) {
@@ -18,19 +18,18 @@ const OrderHistory = () => {
 
     const fetchOrderHistory = async () => {
         try {
-            if (!user || !user.username) {
-                throw new Error('Username is missing');
+            if (!user || !user.userid) {
+                throw new Error('User ID is missing');
             }
-            console.log(user.username)
-            const response = await fetch(`http://localhost:3000/user_orders/${user.username}`);
+            const response = await fetch(`http://localhost:3000/user_orders/${user.userid}`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const data = await response.json();
-            setOrderProducts(data);
+            setOrderHistory(data);
         } catch (error) {
             console.error('Error fetching order history:', error);
-            setOrderProducts([]);
+            setOrderHistory([]);
         }
     };
 
@@ -42,11 +41,15 @@ const OrderHistory = () => {
                     <Link to="/account" className="btn btn-primary">Back to Account</Link>
                 </div>
                 <div className="card-body">
-                    {orderProducts.length > 0 ? (
-                        <div>
-                            <h4>Products Ordered</h4>
-                            <ProductsList data={orderProducts} showAddToCart={false} />
-                        </div>
+                    {orderHistory.length > 0 ? (
+                        orderHistory.map((order, index) => (
+                            <div key={index} className="mb-4">
+                                <h4>Order #{order.orderId}</h4>
+                                <p><strong>Date:</strong> {new Date(order.orderDate).toLocaleDateString()}</p>
+                                <ProductsList data={order.products} addToCart={() => {}} />
+                                <p><strong>Total:</strong> ${order.total.toFixed(2)}</p>
+                            </div>
+                        ))
                     ) : (
                         <p>No order history available.</p>
                     )}

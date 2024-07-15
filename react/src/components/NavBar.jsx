@@ -69,7 +69,6 @@ const NavBar = (props) => {
                                     <li onClick={perfumes}><a className="dropdown-item" href="#">Perfumes</a></li>
                                     <li><hr className="dropdown-divider" /></li>
                                     <li className="nav-item"><Link className="nav-link" to="/account">Account Info</Link></li>
-                                    <li className="nav-item"><Link className="nav-link" to="/order-history">Order History</Link></li>
                                 </ul>
                             </li>
                         </ul>
