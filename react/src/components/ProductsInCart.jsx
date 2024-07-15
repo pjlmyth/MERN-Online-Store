@@ -1,38 +1,22 @@
 import React, { useState, useEffect } from 'react';
+import CartProduct from './CartProduct'
 
-const Product = (props) => {
-
-    const [imagePath, setImagePath] = useState(null);
-
-    useEffect(() => {
-        // Construct the image filename based on data.name
-        let imageName = `${props.data.name.toLowerCase().replace(/\s+/g, '-')}.jpg`; // Normalize image name, replace spaces with dashes
-        let url = `../images/${imageName}`
-        // Dynamic import of the image
-        import(url)
-            .then((image) => {
-                setImagePath(image.default); // Set the image path in state
-            })
-            .catch((err) => {
-                console.error(`Error importing image: ${err}`);
-            });
-    }, [props.data.name]); // Run effect whenever props.data.name changes
+const ProductsInCart = (props) => {
+    console.log(JSON.stringify(props))
 
     return (
-
-        <div className="card" style={{ flex: '1', minWidth: '300px', maxWidth: '45%' }}>
-            <div className="card-body">
-            <img src={imagePath} className="card-img-top" alt={props.data.name} style={{ height: '200px', objectFit: 'cover' }} />
-                <h5 className="card-title"></h5>
-                <div className="card-text">{props.data.name}</div>
-                <div className="card-text">Category: {props.data.category}</div>
+        <div>
+            <h1>My Cart</h1>
+            <div className="card-container" style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
+                {
+                    props.cart.map((product) => (
+                        <CartProduct key={product._id} data={product} />
+                    ))
+                }
             </div>
-            <div className="card-footer" style={{ display: 'flex', justifyContent: 'space-between' }}>
-
-                <div className="card-text">Price: ${props.data.price}</div>
-            </div>
+            <h2>Cart Total:</h2>
         </div>
     );
 };
 
-export default Product;
+export default ProductsInCart;
