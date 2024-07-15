@@ -165,11 +165,11 @@ app.post('/register', async (req, res) => {
 
 app.post('/login', async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { username, password } = req.body;
         const client = await MongoClient.connect(url);
         const db = client.db(dbName);
         const collection = db.collection('users');
-        const user = await collection.findOne({ email });
+        const user = await collection.findOne({ username });
 
         if (!user) {
             return res.status(400).json({ message: "User not found" });
@@ -179,10 +179,18 @@ app.post('/login', async (req, res) => {
             return res.status(400).json({ message: "Invalid password" });
         }
 
-        res.status(200).json({ message: "Login successful", userId: user._id });
+        res.status(200).json({ 
+            message: "Login successful", 
+            uid: user.userid,
+            username: user.username,
+            firstName: user.firstName,
+            lastName: user.lastName
+        });
     } catch (err) {
         console.error("Error:", err);
         res.status(500).json({ message: "Error during login" });
+    } finally {
+        await client.close();
     }
 });
 

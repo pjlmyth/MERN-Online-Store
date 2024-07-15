@@ -6,7 +6,8 @@ import NavBar from './components/NavBar'
 import ProductsList from './components/ProductsList'
 import Register from './components/register'
 import LoginForm from './components/LoginForm'
-import { UserContextProvider } from './hooks/UserContext'
+import { AuthProvider } from './hooks/AuthContext';
+
 
 
 import {
@@ -47,6 +48,7 @@ useEffect(() => {
 
   return (
     <>
+    <AuthProvider>
     <Router>
       <NavBar data={data} page={page} setPage={setPage}/>
       <Routes>
@@ -55,7 +57,7 @@ useEffect(() => {
         <Route path='/login' element={<LoginForm/>}/>
       </Routes>
     </Router>
-      
+    </AuthProvider>  
     </>
   )
 }
