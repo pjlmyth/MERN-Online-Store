@@ -6,6 +6,7 @@ const ProductsInCart = (props) => {
 
     return (
         <div>
+            <h1>My Cart</h1>
             <div className="card-container" style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
                 {
                     props.cart.map((product) => (
@@ -13,6 +14,7 @@ const ProductsInCart = (props) => {
                     ))
                 }
             </div>
+            <h2>Cart Total:</h2>
         </div>
     );
 };
