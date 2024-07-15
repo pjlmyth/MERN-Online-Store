@@ -1,4 +1,5 @@
-import React from 'react';
+import React , { useState } from 'react';
+import Search from './Search';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -30,7 +31,8 @@ const NavBar = (props) => {
         
     }
     
-    
+    const [data, setData] = useState([]);
+
 
     return (
         <>
@@ -67,10 +69,9 @@ const NavBar = (props) => {
                   <li><a className="dropdown-item" href="#">Account Info</a></li>
                 </ul>
               </li>
-            </ul>
+              </ul>
             <form className="d-flex" role="search">
-              <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-              <button className="btn btn-outline-success" type="submit">Search</button>
+              <Search setData={setData} /> {/* Include the Search component here */}
             </form>
           </div>
         </div>
@@ -78,5 +79,6 @@ const NavBar = (props) => {
       </>
     );
 };
+
 
 export default NavBar;
