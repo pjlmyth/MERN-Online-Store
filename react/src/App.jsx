@@ -6,6 +6,7 @@ import NavBar from './components/NavBar'
 import ProductsList from './components/ProductsList'
 import Register from './components/register'
 import LoginForm from './components/LoginForm'
+import { AuthProvider } from './hooks/AuthContext';
 import Cart from './components/Cart'
 import ProductsInCart from './components/ProductsInCart'
 import { UserContextProvider } from './hooks/UserContext'
@@ -51,7 +52,7 @@ function App() {
   
   return (
     <>
-    
+    <AuthProvider>
       <Router>
         <NavBar cart={cart} setPage={setPage} />
         <Routes>
@@ -61,7 +62,7 @@ function App() {
           <Route path='/cart' element={<ProductsInCart cart={cart} addToCart={addToCart} />} />
         </Routes>
       </Router>
-
+      </AuthProvider>
     </>
   )
 }
