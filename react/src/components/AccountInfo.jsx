@@ -55,10 +55,6 @@ const AccountInfo = () => {
                     <p><strong>Gender:</strong> {userInfo.gender}</p>
                     <p><strong>Birthday:</strong> {new Date(userInfo.birthday).toLocaleDateString()}</p>
                 </div>
-                <div className="card-footer">
-                    <Link to="/order-history" className="btn btn-primary me-2">View Order History</Link>
-                    <button className="btn btn-danger" onClick={handleLogout}>Logout</button>
-                </div>
             </div>
         </div>
     );

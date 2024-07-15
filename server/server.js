@@ -198,16 +198,17 @@ app.get('/profile/:userid', async (req, res) => {
     } 
 });
 
-app.get('/user_orders/:userid', async (req, res) => {
+app.get('/user_orders/:username', async (req, res) => {
     try {
-        const { userid } = req.params;
+        console.log("Finding history")
+        const { username } = req.params;
         const client = await MongoClient.connect(url);
         const db = client.db(dbName);
         const collection = db.collection('orders');
-
-        const ordersIds = await collection.find({ userid: parseInt(userid) }).toArray();
-        const productsIds = ordersIds.map(ordersIds => ordersIds.products_id);
-
+        console.log(username)
+        const ordersIds = await collection.find({ user_name: username }).toArray();
+        const productsIds = ordersIds.map(ordersIds => ordersIds.product_id);
+        
         const products = db.collection(`products`);
         const product = await products.find({ 'productID': { $in: productsIds.map(id => parseInt(id)) } }).toArray();
         res.json(product)
