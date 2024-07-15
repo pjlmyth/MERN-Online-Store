@@ -6,8 +6,8 @@ import NavBar from './components/NavBar'
 import ProductsList from './components/ProductsList'
 import Register from './components/register'
 import LoginForm from './components/LoginForm'
+import { AuthProvider } from './hooks/AuthContext';
 import Cart from './components/Cart'
-import { UserContextProvider } from './hooks/UserContext'
 
 
 import {
@@ -48,6 +48,7 @@ useEffect(() => {
 
   return (
     <>
+    <AuthProvider>
     <Router>
       <NavBar data={data} page={page} setPage={setPage}/>
       <Routes>
@@ -57,7 +58,7 @@ useEffect(() => {
         <Route path='/cart' element={<Cart data={cart}/>}/>
       </Routes>
     </Router>
-      
+    </AuthProvider>  
     </>
   )
 }

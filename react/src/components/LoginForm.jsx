@@ -1,33 +1,27 @@
-import React, { useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios from 'axios';
-import { UserContext } from "../hooks/UserContext";
+import React, { useState } from 'react';
+import { useAuth } from '../hooks/AuthContext';
+import { useNavigate, Link } from 'react-router-dom';
 
-function LoginForm() {    
-    const [email, setEmail] = useState('');
+function LoginForm() {
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const { setUser } = useContext(UserContext);
+    const { login } = useAuth();
     const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleLogin = async (event) => {
+        event.preventDefault();
         setError('');
-        if (!email || !password) {
+        if (!username || !password) {
             setError('Please fill in all fields');
             return;
         }
         try {
-            const response = await axios.post("http://localhost:3000/login", { email, password });
-            if (response.data.success) {
-                setUser(response.data.user);
-                navigate("/");
-            } else {
-                setError(response.data.message || "Login failed");
-            }
+            await login(username, password);
+            navigate('/');
         } catch (err) {
             console.log(err);
-            setError(err.response?.data?.message || "An error occurred during login");
+            setError(err.message || "An error occurred during login");
         }
     };
 
@@ -36,17 +30,17 @@ function LoginForm() {
             <div className="bg-white p-3 rounded w-25">
                 <h2><center>Login</center></h2>
                 {error && <div className="alert alert-danger">{error}</div>}
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleLogin}>
                     <div className="mb-3">
-                        <label htmlFor="email"><strong>Email</strong></label>
+                        <label htmlFor="username"><strong>Username</strong></label>
                         <input 
-                            type="email" 
-                            id="email"
-                            placeholder='Enter Email' 
+                            type="text" 
+                            id="username"
+                            placeholder='Enter Username' 
                             autoComplete='off' 
                             className='form-control rounded-0' 
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
                             required
                         />
                     </div>
