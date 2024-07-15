@@ -59,21 +59,52 @@ app.get('/products/:gender', async (req, res) => {
     }
 });
 
-//Note: add if else for different search entries like categories
-app.post('/product/search', async (req, res) => {
+// app.post('/product/search', async (req, res) => {
+//     try {
+//         const searchTerm = req.body.searchTerm.toLowerCase(); // Normalize search term to lowercase
+
+//         const client = await MongoClient.connect(url);
+//         const db = client.db(dbName);
+//         const collection = db.collection('products');
+
+//         let query = {};
+
+//         // Check if searchTerm contains a space, suggesting it's a category
+//         if (searchTerm.includes(' ')) {
+//             query = { "category": { $regex: searchTerm, $options: 'i' } }; // Case-insensitive search by category
+//         } else {
+//             query = { "name": { $regex: searchTerm, $options: 'i' } }; // Case-insensitive search by name
+//         }
+
+//         const products = await collection.find(query).toArray();
+
+//         res.json(products);
+//     } catch (err) {
+//         console.error('Error:', err);
+//         res.status(500).send('"Missing Products ☹"');
+//     }
+// });
+
+app.post('/products/search', async (req, res) => {
     try {
-        const prodname = req.body.searchTerm;
+        const { searchTerm } = req.body;
 
         const client = await MongoClient.connect(url);
         const db = client.db(dbName);
         const collection = db.collection('products');
-        const products = await collection.find({"name": prodname}).toArray();
+
+        const query = {
+            category: { $regex: searchTerm, $options: 'i' } // Case-insensitive search by category
+        };
+
+        const products = await collection.find(query).toArray();
         res.json(products);
     } catch (err) {
         console.error('Error:', err);
-        res.status(500).send('"Missing Products ☹"');
+        res.status(500).send('Error searching products');
     }
 });
+
 
 app.get('/users', async (req, res) => {
     try {

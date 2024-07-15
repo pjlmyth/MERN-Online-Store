@@ -1,28 +1,39 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+
+
+import React , { useState } from 'react';
+import Search from './Search';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/AuthContext';
 
+
 const NavBar = (props) => {
+    const navigate = useNavigate();
     const { user, logout } = useAuth();
+    const cartClick = (cart) => {
+      console.log("in CartClick")
+      console.log(cart)
+      navigate('/cart',{state:props.cart})
+    }
+
 
     const handbags = () => {
         props.setPage(['Handbags']);
-        console.log(props.page);
+        
     }
 
     const shoes = () => {
         props.setPage(['Shoes']);
-        console.log(props.page);
+        
     }
 
     const jewelry = () => {
         props.setPage(['Jewelry']);
-        console.log(props.page);
+        
     }
 
     const perfumes = () => {
         props.setPage(['Perfumes']);
-        console.log(props.page);
+        
     }
 
     return (
@@ -44,6 +55,9 @@ const NavBar = (props) => {
                             <li className="nav-item">
                                 <a className="nav-link" href="#">Men</a>
                             </li>
+                              <li className="nav-item">
+                              <div className="nav-link" onClick={()=>{cartClick(props.cart)}}>Cart</div>
+                            </li>
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     More
@@ -59,10 +73,9 @@ const NavBar = (props) => {
                                 </ul>
                             </li>
                         </ul>
-                        <form className="d-flex" role="search">
-                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                            <button className="btn btn-outline-success" type="submit">Search</button>
-                        </form>
+                          <form className="d-flex" role="search">
+                            <Search setData={setData} /> {/* Include the Search component here */}
+                          </form>
                         {user ? (
                             <div className="ms-2 d-flex align-items-center">
                                 <span className="me-2">Welcome, {user.firstName || user.username}!</span>
@@ -78,7 +91,9 @@ const NavBar = (props) => {
                 </div>
             </nav>
         </>
+
     );
 };
+
 
 export default NavBar;

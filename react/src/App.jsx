@@ -10,6 +10,8 @@ import { AuthProvider } from './hooks/AuthContext';
 import Cart from './components/Cart'
 import AccountInfo from './components/AccountInfo';
 import OrderHistory from './components/OrderHistory'
+import Search from "./components/Search";
+import ProductsInCart from './components/ProductsInCart'
 
 
 import {
@@ -20,34 +22,36 @@ import {
 } from "react-router-dom";
 
 function App() {
+  
   const [cart, setCart] = useState([]);
   const [data, setData] = useState([]);
   const [page, setPage] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-        try {
-            const response = await fetch(`http://localhost:3000/products/${page}`);
-            if (!response.ok) {
-                throw new Error('Data could not be fetched!');
-            }
-            const json_response = await response.json();
-            setData(json_response); // assign JSON response to the data variable.
-        } catch (error) {
-            console.error('Error fetching products:', error);
+      try {
+        const response = await fetch(`http://localhost:3000/products/${page}`);
+        if (!response.ok) {
+          throw new Error('Data could not be fetched!');
         }
+        const json_response = await response.json();
+        setData(json_response); // assign JSON response to the data variable.
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
     };
 
     fetchData();
-}, [page]);
+  }, [page]);
 
-useEffect(() => {
-  console.log(cart)
+  useEffect(() => {
+    
   }, [cart]);
 
   const addToCart = (el) => {
     setCart([...cart, el]);
-    };
+  };
 
+  
   return (
     <>
     <AuthProvider>
