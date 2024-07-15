@@ -4,6 +4,9 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import NavBar from './components/NavBar'
 import ProductsList from './components/ProductsList'
+import Register from './components/register'
+import LoginForm from './components/LoginForm'
+
 
 import {
   BrowserRouter as Router,
@@ -38,6 +41,8 @@ function App() {
       <NavBar data={data} page={page} setPage={setPage}/>
       <Routes>
         <Route exact path="/" element={<ProductsList data={data} page={page} setPage={setPage} />} />
+        <Route path='/register' element={<Register/>}/>
+        <Route path='/login' element={<LoginForm/>}/>
       </Routes>
     </Router>
       
