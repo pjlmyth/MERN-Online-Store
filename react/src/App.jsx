@@ -8,7 +8,6 @@ import Register from './components/register'
 import LoginForm from './components/LoginForm'
 import { AuthProvider } from './hooks/AuthContext';
 import Cart from './components/Cart'
-import { UserContextProvider } from './hooks/UserContext'
 import Search from "./components/Search";
 import ProductsInCart from './components/ProductsInCart'
 
