@@ -239,7 +239,7 @@ app.get('/user_orders/:username', async (req, res) => {
         console.log(username)
         const ordersIds = await collection.find({ user_name: username }).toArray();
         const productsIds = ordersIds.map(ordersIds => ordersIds.product_id);
-
+        console.log(username)
         const products = db.collection(`products`);
         const product = await products.find({ 'productID': { $in: productsIds.map(id => parseInt(id)) } }).toArray();
         res.json(product)
