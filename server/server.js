@@ -4,6 +4,7 @@ import { MongoClient, ObjectId } from 'mongodb';
 import dotenv from 'dotenv';
 import cors from 'cors';
 
+
 dotenv.config();
 const url = process.env.MONGO_DB_URL;
 const dbName = process.env.MONGO_DB;
@@ -35,6 +36,21 @@ app.get('/products/:category', async (req, res) => {
         const db = client.db(dbName);
         const collection = db.collection('products');
         const products  = await collection.find({'category': category}).toArray();
+        res.json(products);
+    } catch (err) {
+        console.error("Error:", err);
+        res.status(500).send("Missing Products ☹");
+    }
+});
+
+app.get('/products/:gender', async (req, res) => {
+    try {
+        const { gender } = req.params;
+        console.log(`Finding ${gender}`)
+        const client = await MongoClient.connect(url);
+        const db = client.db(dbName);
+        const collection = db.collection('products');
+        const products  = await collection.find({'gender': gender}).toArray();
         res.json(products);
     } catch (err) {
         console.error("Error:", err);
@@ -114,6 +130,74 @@ app.get('/products/:page/:limit', async (req, res) => {
     }
 });
 
+app.post('/register', async (req, res) => {
+    try {
+        const {userid, name, email, password, firstName, lastName, gender, birthday} = req.body;
+        const client = await MongoClient.connect(url);
+        const db = client.db(dbName);
+        const collection = db.collection('users');
+
+        // Check if user with this email or userid already exists
+        const existingUser = await collection.findOne({ $or: [{ email }, { userid }] });
+        if (existingUser) {
+            return res.status(400).json({ message: "User with this email or userid already exists" });
+        }
+    
+        const newUser = {
+            userid: parseInt(userid),
+            username: name,
+            email,
+            password,
+            firstName,
+            lastName,
+            gender,
+            birthday: new Date(birthday)
+        };
+
+        const result = await collection.insertOne(newUser);
+        
+        res.status(201).json({ message: "User registered successfully", userId: result.insertedId });
+    } catch (err) {
+        console.error("Error:", err);
+        res.status(500).json({ message: "Error registering user" });
+    }
+});
+
+app.post('/login', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const client = await MongoClient.connect(url);
+        const db = client.db(dbName);
+        const collection = db.collection('users');
+        const user = await collection.findOne({ email });
+
+        if (!user) {
+            return res.status(400).json({ message: "User not found" });
+        }
+
+        if (user.password !== password) {
+            return res.status(400).json({ message: "Invalid password" });
+        }
+
+        res.status(200).json({ message: "Login successful", userId: user._id });
+    } catch (err) {
+        console.error("Error:", err);
+        res.status(500).json({ message: "Error during login" });
+    }
+});
+
+app.get('/profile', async (req, res) => {
+    try {
+        const client = await MongoClient.connect(url);
+        const db = client.db(dbName);
+        const collection = db.collection('users');
+        const products  = await collection.find({}).toArray();
+        res.json(products);
+    } catch (err) {
+        console.error("Error:", err);
+        res.status(500).send("Missing Products ☹");
+    }
+});
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
