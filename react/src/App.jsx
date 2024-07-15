@@ -6,6 +6,7 @@ import NavBar from './components/NavBar'
 import ProductsList from './components/ProductsList'
 import Register from './components/register'
 import LoginForm from './components/LoginForm'
+import { UserContextProvider } from './hooks/UserContext'
 
 
 import {
