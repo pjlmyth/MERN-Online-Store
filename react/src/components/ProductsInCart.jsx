@@ -14,7 +14,10 @@ const ProductsInCart = (props) => {
                     ))
                 }
             </div>
-            <h2>Cart Total:</h2>
+            <h2>Cart Total: ${props.total}</h2>
+            <div>
+            <button className="btn btn-sm btn-dark" >Place Order</button>
+            </div>
         </div>
     );
 };

@@ -8,7 +8,6 @@ import Register from './components/register'
 import LoginForm from './components/LoginForm'
 import { AuthProvider } from './hooks/AuthContext';
 import Cart from './components/Cart'
-import { UserContextProvider } from './hooks/UserContext'
 import Search from "./components/Search";
 import ProductsInCart from './components/ProductsInCart'
 
@@ -25,6 +24,7 @@ function App() {
   const [cart, setCart] = useState([]);
   const [data, setData] = useState([]);
   const [page, setPage] = useState([]);
+  const [total, setTotal] = useState(0);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -48,6 +48,7 @@ function App() {
 
   const addToCart = (el) => {
     setCart([...cart, el]);
+    setTotal(total + el.price);
   };
 
   
@@ -60,7 +61,7 @@ function App() {
           <Route exact path="/" element={<ProductsList data={data} page={page} setPage={setPage} addToCart={addToCart} />} />
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<LoginForm />} />
-          <Route path='/cart' element={<ProductsInCart cart={cart} addToCart={addToCart} />} />
+          <Route path='/cart' element={<ProductsInCart cart={cart} addToCart={addToCart} total={total}/>} />
         </Routes>
       </Router>
       </AuthProvider>
