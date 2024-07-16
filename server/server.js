@@ -70,7 +70,8 @@ app.post('/products/search', async (req, res) => {
         const query = {
             $or: [
                 { name: { $regex: searchTerm, $options: 'i' } },
-                { category: { $regex: searchTerm, $options: 'i' } }
+                { category: { $regex: searchTerm, $options: 'i' } },
+                { gender: { $regex: searchTerm, $options: 'i' } }
             ]
         };
 
