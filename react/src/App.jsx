@@ -8,8 +8,14 @@ import LoginForm from './components/LoginForm';
 import Register from './components/register';
 import AccountInfo from './components/AccountInfo';
 import OrderHistory from './components/OrderHistory';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 function App() {
+
+  toast.configure()
+
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [page, setPage] = useState(['All']);
@@ -34,6 +40,7 @@ function App() {
 
   const addToCart = (product) => {
     setCart([...cart, product]);
+    toast(`Added ${product.name} to cart`);
   };
 
   const removeFromCart = (productId) => {
