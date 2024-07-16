@@ -4,37 +4,26 @@ import { useAuth } from '../hooks/AuthContext';
 
 const NavBar = (props) => {
     const { user, logout } = useAuth();
-    
-    const cartClick = (cart) => {
-      console.log("in CartClick")
-      console.log(cart)
-      navigate('/cart',{state:props.cart})
-    }
+
     const handbags= () => {
         props.setPage(['Handbags']);
         console.log(props.page);
     }
 
     const shoes= () => {
-    const shoes= () => {
         props.setPage(['Shoes']);
         console.log(props.page);
     }
 
-    const jewelry= () => {
     const jewelry= () => {
         props.setPage(['Jewelry']);
         console.log(props.page);
     }
 
     const perfumes= () => {
-    const perfumes= () => {
         props.setPage(['Perfumes']);
         console.log(props.page);
     }
-
-    const [data, setData] = useState([]);
-
 
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
