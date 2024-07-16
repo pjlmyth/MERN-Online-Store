@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Search = (props) => {
+const Search = ({ onSearchResults }) => {
     const [searchTerm, setSearchTerm] = useState('');
 
     const handleSubmit = (e) => {
@@ -20,7 +20,11 @@ const Search = (props) => {
         })
         .then((data) => {
             console.log('Search results:', data);
-            setData(data); // Update parent component state
+            if (typeof onSearchResults === 'function') {
+                onSearchResults(data);
+            } else {
+                console.error('onSearchResults is not a function');
+            }
         })
         .catch((error) => {
             console.error('Error searching:', error);
@@ -29,14 +33,18 @@ const Search = (props) => {
 
     const handleChange = (e) => {
         setSearchTerm(e.target.value);
-        console.log(searchTerm);
     };
 
     return (
         <form className="d-flex" role="search" onSubmit={handleSubmit}>
-            <input className="form-control me-2" type="search"
-                placeholder="Search" aria-label="Search"
-                value={searchTerm} onChange={handleChange} />
+            <input 
+                className="form-control me-2" 
+                type="search"
+                placeholder="Search by name or category" 
+                aria-label="Search"
+                value={searchTerm} 
+                onChange={handleChange} 
+            />
             <button className="btn btn-outline-success" type="submit">Search</button>
         </form>
     );

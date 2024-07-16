@@ -59,32 +59,6 @@ app.get('/products/:gender', async (req, res) => {
     }
 });
 
-// app.post('/product/search', async (req, res) => {
-//     try {
-//         const searchTerm = req.body.searchTerm.toLowerCase(); // Normalize search term to lowercase
-
-//         const client = await MongoClient.connect(url);
-//         const db = client.db(dbName);
-//         const collection = db.collection('products');
-
-//         let query = {};
-
-//         // Check if searchTerm contains a space, suggesting it's a category
-//         if (searchTerm.includes(' ')) {
-//             query = { "category": { $regex: searchTerm, $options: 'i' } }; // Case-insensitive search by category
-//         } else {
-//             query = { "name": { $regex: searchTerm, $options: 'i' } }; // Case-insensitive search by name
-//         }
-
-//         const products = await collection.find(query).toArray();
-
-//         res.json(products);
-//     } catch (err) {
-//         console.error('Error:', err);
-//         res.status(500).send('"Missing Products ☹"');
-//     }
-// });
-
 app.post('/products/search', async (req, res) => {
     try {
         const { searchTerm } = req.body;
@@ -94,7 +68,11 @@ app.post('/products/search', async (req, res) => {
         const collection = db.collection('products');
 
         const query = {
-            category: { $regex: searchTerm, $options: 'i' } // Case-insensitive search by category
+            $or: [
+                { name: { $regex: searchTerm, $options: 'i' } },
+                { category: { $regex: searchTerm, $options: 'i' } },
+                { gender: { $regex: searchTerm, $options: 'i' } }
+            ]
         };
 
         const products = await collection.find(query).toArray();

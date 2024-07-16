@@ -40,11 +40,15 @@ function App() {
     setCart(prevCart => prevCart.filter(item => item._id !== productId));
   };
 
+  const handleSearchResults = (searchResults) => {
+    setProducts(searchResults);
+  };
+
   return (
     <AuthProvider>
       <Router>
         <div className="App">
-          <NavBar cart={cart} setPage={setPage} />
+          <NavBar cart={cart} setPage={setPage} onSearchResults={handleSearchResults} />
           <Routes>
             <Route path="/" element={<ProductsList data={products} addToCart={addToCart} />} />
             <Route path="/cart" element={<ProductsInCart cart={cart} removeFromCart={removeFromCart} />} />
