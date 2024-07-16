@@ -51,10 +51,10 @@ const NavBar = ({ cart, setPage, onSearchResults }) => {
                             <Link className="nav-link active" aria-current="page" to="/">Home</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="#">Women</Link>
+                            <Link className="nav-link" to="#" onClick={Women}>Women</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="#">Men</Link>
+                            <Link className="nav-link" to="#" onClick={Men}>Men</Link>
                         </li>
                         <li className="nav-item">
                             <div className="nav-link" onClick={()=>{cartClick(cart)}}>Cart</div>

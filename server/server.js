@@ -34,24 +34,15 @@ app.get('/products/:category', async (req, res) => {
         console.log(`Finding ${category}`)
         const client = await MongoClient.connect(url);
         const db = client.db(dbName);
+        const query = {
+            $or: [
+                { category: { $regex: category, $options: 'i' } },
+                { gender: { $regex: category, $options: 'i' } }
+            ]
+        };
         const collection = db.collection('products');
-        const products  = await collection.find({'category': category}).toArray();
+        const products  = await collection.find(query).toArray();
         console.log(products)
-        res.json(products);
-    } catch (err) {
-        console.error("Error:", err);
-        res.status(500).send("Missing Products ☹");
-    }
-});
-
-app.get('/products/:gender', async (req, res) => {
-    try {
-        const { gender } = req.params;
-        console.log(`Finding ${gender}`)
-        const client = await MongoClient.connect(url);
-        const db = client.db(dbName);
-        const collection = db.collection('products');
-        const products  = await collection.find({'gender': gender}).toArray();
         res.json(products);
     } catch (err) {
         console.error("Error:", err);
