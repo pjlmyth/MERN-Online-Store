@@ -10,6 +10,8 @@ import { AuthProvider } from './hooks/AuthContext';
 import Cart from './components/Cart'
 import Search from "./components/Search";
 import ProductsInCart from './components/ProductsInCart'
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 import {
@@ -19,12 +21,15 @@ import {
   Link
 } from "react-router-dom";
 
+toast.configure()
+
 function App() {
   
   const [cart, setCart] = useState([]);
   const [data, setData] = useState([]);
   const [page, setPage] = useState([]);
   const [total, setTotal] = useState(0);
+  const [cartCount, setCartCount] = useState(0);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -49,6 +54,8 @@ function App() {
   const addToCart = (el) => {
     setCart([...cart, el]);
     setTotal(total + el.price);
+    setCartCount(cartCount + 1);
+    toast(`Added ${el.name} to Cart`);
   };
 
   
@@ -56,7 +63,7 @@ function App() {
     <>
     <AuthProvider>
       <Router>
-        <NavBar cart={cart} setPage={setPage} />
+        <NavBar cart={cart} setPage={setPage} cartCount={cartCount} />
         <Routes>
           <Route exact path="/" element={<ProductsList data={data} page={page} setPage={setPage} addToCart={addToCart} />} />
           <Route path='/register' element={<Register />} />

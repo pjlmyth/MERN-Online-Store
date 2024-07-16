@@ -54,7 +54,7 @@ const NavBar = (props) => {
                 <a className="nav-link" href="#">Men</a>
               </li>
               <li className="nav-item">
-                <div className="nav-link" onClick={()=>{cartClick(props.cart)}}>Cart</div>
+                <div className="nav-link" onClick={()=>{cartClick(props.cart)}}>Cart ({props.cartCount})</div>
               </li>
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
