@@ -56,7 +56,7 @@ function App() {
     <>
     <AuthProvider>
     <Router>
-      <NavBar data={data} page={page} setPage={setPage}/>
+      <NavBar cart={cart} setPage={setPage}/>
       <Routes>
         <Route exact path="/" element={<ProductsList data={data} page={page} setPage={setPage} addToCart={addToCart}/>} />
         <Route path='/register' element={<Register/>}/>
