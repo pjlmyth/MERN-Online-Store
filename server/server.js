@@ -132,21 +132,6 @@ app.get('/orders', async (req, res) => {
     }
 });
 
-//Note: mot fully operational
-app.get('/user_orders', async (req, res) => {
-    try {
-        const userid = req.session.userid;
-        const client = await MongoClient.connect(url);
-        const db = client.db(dbName);
-        const collection = db.collection('orders');
-        const products  = await collection.find({'userid': userid}).toArray();
-        res.json(products);
-    } catch (err) {
-        console.error("Error:", err);
-        res.status(500).send("Missing Products ☹");
-    }
-});
-
 app.get('/products/:page/:limit', async (req, res) => {
     try {
         let { page, limit } = req.params;
@@ -213,7 +198,7 @@ app.post('/login', async (req, res) => {
 
         res.status(200).json({ 
             message: "Login successful", 
-            uid: user.userid,
+            userid: user.userid,
             username: user.username,
             firstName: user.firstName,
             lastName: user.lastName
@@ -221,23 +206,49 @@ app.post('/login', async (req, res) => {
     } catch (err) {
         console.error("Error:", err);
         res.status(500).json({ message: "Error during login" });
-    } finally {
-        await client.close();
-    }
+    } 
 });
 
-app.get('/profile', async (req, res) => {
+app.get('/profile/:userid', async (req, res) => {
     try {
+        const { userid } = req.params;
         const client = await MongoClient.connect(url);
         const db = client.db(dbName);
         const collection = db.collection('users');
-        const products  = await collection.find({}).toArray();
-        res.json(products);
+        const user = await collection.findOne({ userid: userid });  // Note: userid is a string
+        
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        const { password, ...userInfo } = user;
+        res.json(userInfo);
     } catch (err) {
         console.error("Error:", err);
-        res.status(500).send("Missing Products ☹");
-    }
+        res.status(500).json({ message: "Error fetching user profile" });
+    } 
 });
+
+app.get('/user_orders/:username', async (req, res) => {
+    try {
+        console.log("Finding history")
+        const { username } = req.params;
+        const client = await MongoClient.connect(url);
+        const db = client.db(dbName);
+        const collection = db.collection('orders');
+        console.log(username)
+        const ordersIds = await collection.find({ user_name: username }).toArray();
+        const productsIds = ordersIds.map(ordersIds => ordersIds.product_id);
+        console.log(username)
+        const products = db.collection(`products`);
+        const product = await products.find({ 'productID': { $in: productsIds.map(id => parseInt(id)) } }).toArray();
+        res.json(product)
+    } catch (err) {
+        console.error("Error:", err);
+        res.status(500).json({ message: "Error fetching user orders" });
+    } 
+});
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
