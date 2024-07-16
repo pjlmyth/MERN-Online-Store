@@ -161,7 +161,7 @@ app.post('/register', async (req, res) => {
         }
     
         const newUser = {
-            userid: parseInt(userid),
+            userid: userid,
             username: name,
             email,
             password,
@@ -249,6 +249,35 @@ app.get('/user_orders/:username', async (req, res) => {
     } 
 });
 
+app.post('/place-order', async (req, res) => {
+    try {
+        const { user_id, user_name, product_id, product_name, product_category } = req.body;
+
+        const client = await MongoClient.connect(url);
+        const db = client.db(dbName);
+        const collection = db.collection('orders');
+
+        const newOrder = {
+            order_date: new Date().toISOString(),
+            user_id: user_id,
+            product_id: product_id,
+            product_name: product_name,
+            product_category: product_category,
+            user_name: user_name
+        };
+
+        const result = await collection.insertOne(newOrder);
+
+        if (result.acknowledged) {
+            res.status(201).json({ message: "Order placed successfully", orderId: result.insertedId });
+        } else {
+            throw new Error('Failed to insert order');
+        }
+    } catch (err) {
+        console.error("Error:", err);
+        res.status(500).json({ message: "Error placing order", error: err.message });
+    }
+});
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
