@@ -8,8 +8,6 @@ import Register from './components/register'
 import LoginForm from './components/LoginForm'
 import { AuthProvider } from './hooks/AuthContext';
 import Cart from './components/Cart'
-import AccountInfo from './components/AccountInfo';
-import OrderHistory from './components/OrderHistory'
 import Search from "./components/Search";
 import ProductsInCart from './components/ProductsInCart'
 
@@ -55,18 +53,16 @@ function App() {
   return (
     <>
     <AuthProvider>
-    <Router>
-      <NavBar data={data} page={page} setPage={setPage}/>
-      <Routes>
-        <Route exact path="/" element={<ProductsList data={data} page={page} setPage={setPage} addToCart={addToCart}/>} />
-        <Route path='/register' element={<Register/>}/>
-        <Route path='/login' element={<LoginForm/>}/>
-        <Route path="/account" element={<AccountInfo />} />
-        <Route path="/order-history" element={<OrderHistory />} />
-        <Route path='/cart' element={<Cart data={cart}/>}/>
-      </Routes>
-    </Router>
-    </AuthProvider>  
+      <Router>
+        <NavBar cart={cart} setPage={setPage} />
+        <Routes>
+          <Route exact path="/" element={<ProductsList data={data} page={page} setPage={setPage} addToCart={addToCart} />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/login' element={<LoginForm />} />
+          <Route path='/cart' element={<ProductsInCart cart={cart} addToCart={addToCart} />} />
+        </Routes>
+      </Router>
+      </AuthProvider>
     </>
   )
 }

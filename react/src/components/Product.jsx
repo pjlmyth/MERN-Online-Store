@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const Product = (props) => {
+
     const [imagePath, setImagePath] = useState(null);
 
     useEffect(() => {
@@ -18,17 +19,16 @@ const Product = (props) => {
     }, [props.data.name]); // Run effect whenever props.data.name changes
 
     return (
+
         <div className="card" style={{ flex: '1', minWidth: '300px', maxWidth: '45%' }}>
             <div className="card-body">
-                <img src={imagePath} className="card-img-top" alt={props.data.name} style={{ height: '200px', objectFit: 'cover' }} />
+            <img src={imagePath} className="card-img-top" alt={props.data.name} style={{ height: '200px', objectFit: 'cover' }} />
                 <h5 className="card-title"></h5>
                 <div className="card-text">{props.data.name}</div>
                 <div className="card-text">Category: {props.data.category}</div>
             </div>
             <div className="card-footer" style={{ display: 'flex', justifyContent: 'space-between' }}>
-                {props.showAddToCart !== false && (
-                    <button className="btn btn-sm btn-dark" onClick={() => props.addToCart(props.data)}>Add To Cart</button>
-                )}
+                <button className="btn btn-sm btn-dark" onClick={() => props.addToCart(props.data)}>Add To Cart</button>
                 <div className="card-text">Price: ${props.data.price}</div>
             </div>
         </div>

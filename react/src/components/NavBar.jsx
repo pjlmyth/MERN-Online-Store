@@ -18,19 +18,25 @@ const NavBar = (props) => {
     }
 
     const shoes= () => {
+    const shoes= () => {
         props.setPage(['Shoes']);
         console.log(props.page);
     }
 
+    const jewelry= () => {
     const jewelry= () => {
         props.setPage(['Jewelry']);
         console.log(props.page);
     }
 
     const perfumes= () => {
+    const perfumes= () => {
         props.setPage(['Perfumes']);
         console.log(props.page);
     }
+    
+    const [data, setData] = useState([]);
+
 
     const [data, setData] = useState([]);
 
