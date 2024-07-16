@@ -1,9 +1,17 @@
-import React from 'react';
+import React , { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import Search  from './Search'
 
 const NavBar = (props) => {
     const { user, logout } = useAuth();
+    
+    const cartClick = (cart) => {
+      console.log("in CartClick")
+      console.log(cart)
+      navigate('/cart',{state:props.cart})
+    }
 
     const handbags= () => {
         props.setPage(['Handbags']);
@@ -24,6 +32,9 @@ const NavBar = (props) => {
         props.setPage(['Perfumes']);
         console.log(props.page);
     }
+
+    const [data, setData] = useState([]);
+
 
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -59,9 +70,8 @@ const NavBar = (props) => {
                         </li>
                     </ul>
                     <form className="d-flex" role="search">
-                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                        <button className="btn btn-outline-success" type="submit">Search</button>
-                    </form>
+                      <Search setData={setData} /> {/* Include the Search component here */}
+                  </form>
                     {user ? (
                         <div className="ms-2">
                             <span className="me-2">Welcome, {user.username}!</span>
