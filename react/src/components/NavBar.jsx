@@ -12,7 +12,6 @@ const NavBar = (props) => {
       console.log(cart)
       navigate('/cart',{state:props.cart})
     }
-
     const handbags= () => {
         props.setPage(['Handbags']);
         console.log(props.page);
