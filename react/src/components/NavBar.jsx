@@ -1,35 +1,33 @@
-import React , { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import Search from './Search';
 
-const NavBar = (props) => {
+const NavBar = ({ cart, setPage, onSearchResults }) => {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
+    
     const cartClick = (cart) => {
         console.log("in CartClick")
         console.log(cart)
-        navigate('/cart',{state:props.cart})
+        navigate('/cart',{state:cart})
     }
 
-    const handbags= () => {
-        props.setPage(['Handbags']);
-        console.log(props.page);
+    const handbags = () => {
+        setPage(['Handbags']);
     }
 
-    const shoes= () => {
-        props.setPage(['Shoes']);
-        console.log(props.page);
+    const shoes = () => {
+        setPage(['Shoes']);
     }
 
-    const jewelry= () => {
-        props.setPage(['Jewelry']);
-        console.log(props.page);
+    const jewelry = () => {
+        setPage(['Jewelry']);
     }
 
-    const perfumes= () => {
-        props.setPage(['Perfumes']);
-        console.log(props.page);
+    const perfumes = () => {
+        setPage(['Perfumes']);
     }
 
     return (
@@ -51,7 +49,7 @@ const NavBar = (props) => {
                             <Link className="nav-link" to="#">Men</Link>
                         </li>
                         <li className="nav-item">
-                            <div className="nav-link" onClick={()=>{cartClick(props.cart)}}>Cart</div>
+                            <div className="nav-link" onClick={()=>{cartClick(cart)}}>Cart</div>
                         </li>
                         <li className="nav-item dropdown">
                             <Link className="nav-link dropdown-toggle" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -68,10 +66,7 @@ const NavBar = (props) => {
                             </ul>
                         </li>
                     </ul>
-                    <form className="d-flex" role="search">
-                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                        <button className="btn btn-outline-success" type="submit">Search</button>
-                    </form>
+                    <Search onSearchResults={onSearchResults} />
                     {user ? (
                         <div className="ms-2">
                             <span className="me-2">Welcome, {user.username}!</span>
