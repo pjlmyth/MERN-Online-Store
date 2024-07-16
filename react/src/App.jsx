@@ -63,7 +63,7 @@ function App() {
         <Route path='/login' element={<LoginForm/>}/>
         <Route path="/account" element={<AccountInfo />} />
         <Route path="/order-history" element={<OrderHistory />} />
-        <Route path='/cart' element={<Cart data={cart}/>}/>
+        <Route path='/cart' element={<ProductsInCart cart={cart} addToCart={addToCart} />} />
       </Routes>
     </Router>
     </AuthProvider>  

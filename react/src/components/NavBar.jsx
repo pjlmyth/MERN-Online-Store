@@ -1,9 +1,16 @@
-import React from 'react';
+import React , { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const NavBar = (props) => {
     const { user, logout } = useAuth();
+    const navigate = useNavigate();
+    const cartClick = (cart) => {
+        console.log("in CartClick")
+        console.log(cart)
+        navigate('/cart',{state:props.cart})
+    }
 
     const handbags= () => {
         props.setPage(['Handbags']);
@@ -43,6 +50,9 @@ const NavBar = (props) => {
                         <li className="nav-item">
                             <Link className="nav-link" to="#">Men</Link>
                         </li>
+                        <li className="nav-item">
+                            <div className="nav-link" onClick={()=>{cartClick(props.cart)}}>Cart</div>
+                        </li>
                         <li className="nav-item dropdown">
                             <Link className="nav-link dropdown-toggle" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 More
@@ -73,7 +83,6 @@ const NavBar = (props) => {
                             <Link to="/register" className="btn btn-outline-secondary">Register</Link>
                         </div>
                     )}
-                    <Link to="/cart" className="btn btn-outline-primary ms-2">Cart</Link>
                 </div>
             </div>
         </nav>
